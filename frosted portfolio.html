@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fantasy Portfolio</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+  body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(to bottom, #0d343a 0%, #000 100%);
+    color: #fff;
+    overflow-x:hidden;
+  }
+
+  /* Rain Background */
+  .rain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .drop {
+    background: linear-gradient(to bottom, rgba(13,52,58,0.8) 0%, rgba(255,255,255,0.7) 100%);
+    width: 2px; height: 90px;
+    position: absolute;
+    top: -100px;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0); opacity:0.3; }
+    50% { opacity:0.8; }
+    100% { transform: translateY(110vh); opacity:0.2; }
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  nav ul li a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 8px #00eaff;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+  }
+  .hamburger span {
+    width:25px;
+    height:3px;
+    background:#fff;
+    border-radius:3px;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    display:none;
+    flex-direction:column;
+    background: rgba(0,0,0,0.85);
+    position:fixed;
+    top:60px;
+    right:0;
+    width:100%;
+    padding:20px;
+    text-align:center;
+    z-index:9;
+  }
+  .mobile-menu a {
+    color:#fff;
+    display:block;
+    margin:15px 0;
+    font-size:1.1rem;
+    text-decoration:none;
+  }
+  .mobile-menu a:hover {
+    color:#00eaff;
+    text-shadow:0 0 10px #00eaff;
+  }
+
+  /* Fullscreen Panels */
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card {
+    max-width: 800px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,234,255,0.3);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+  }
+  .card.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: 20px;
+    color: #00eaff;
+    text-shadow: 0 0 15px #00eaff;
+  }
+  .card p, .card ul {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.6;
+  }
+  ul { list-style: none; padding: 0; }
+  ul li::before {
+    content: "✦";
+    color: #00eaff;
+    margin-right: 8px;
+    text-shadow: 0 0 8px #00eaff;
+  }
+
+  /* Profile Photo */
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px rgba(0,234,255,0.4);
+  }
+
+  /* Contact Links */
+  .contact a {
+    display: inline-block;
+    margin: 10px;
+    color: #00eaff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .contact a:hover {
+    color: #fff;
+    text-shadow: 0 0 12px #00eaff;
+  }
+
+  /* Responsive */
+  @media(max-width:768px){
+    nav { padding: 10px 20px; }
+    nav ul { display:none; }
+    .hamburger { display:flex; }
+    .card { padding: 25px; }
+    .profile-img { width:120px; height:120px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Rain -->
+<div class="rain" id="rain"></div>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">✨ MyRealm</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- Sections -->
+<section id="about">
+  <div class="card">
+    <img src="me.jpg" alt="Profile" class="profile-img">
+    <h2>Welcome to My Realm</h2>
+    <p>🌌 Dreamer • Developer • Designer • Teacher</p>
+    <p>I am a creator who crafts digital worlds with code and imagination. My journey is guided by curiosity and fueled by design, where every project is a spell, and every interface a portal.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="card">
+    <h2>Spells I Cast (Skills)</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>React & Tailwind</li>
+      <li>UI/UX Enchantments</li>
+      <li>Responsive Design Magic</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="card">
+    <h2>Artifacts I Forged (Projects)</h2>
+    <p><strong>Portal Site:</strong> A magical entry point to my works, glowing with life.</p>
+    <p><strong>Marketplace Spell:</strong> An enchanted e-commerce world with seamless flows.</p>
+    <p><strong>Dream App:</strong> A cross-realm mobile design for adventurers everywhere.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="card contact">
+    <h2>Summon Me (Contact)</h2>
+    <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    <p>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+    </p>
+  </div>
+</section>
+
+<script>
+  // Rain effect
+  const rain = document.getElementById('rain');
+  const dropsCount = 150;
+  for(let i=0; i<dropsCount; i++){
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.left = Math.random()*100 + 'vw';
+    drop.style.animationDuration = (0.6 + Math.random()*0.8)+'s';
+    drop.style.animationDelay = Math.random()*5+'s';
+    rain.appendChild(drop);
+  }
+
+  // Reveal animation on scroll
+  const cards = document.querySelectorAll('.card');
+  const reveal = () => {
+    const trigger = window.innerHeight * 0.85;
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if(top < trigger) card.classList.add('show');
+    });
+  };
+  window.addEventListener('scroll', reveal);
+  reveal();
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+  });
+</script>
+
+</body>
+</html>
