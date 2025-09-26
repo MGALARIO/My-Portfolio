@@ -191,78 +191,79 @@
     .profile-img { width:120px; height:120px; }
   }
 
-
-/* ===============================
-   Smoke Effect - Desktop & Mobile
-=================================*/
-
-/* Smoke container */
-.smoke-container {
-  position: relative;
-  display: inline-block;
-  z-index: 0; /* smoke behind image */
-}
-
-/* Smoke particles (desktop default) */
-.smoke {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, rgba(0,255,255,0.8) 20%, transparent 80%);
-  border-radius: 50%;
-  filter: blur(25px); /* visible */
-  animation: riseWind 6s infinite ease-in-out;
-  opacity: 0.8;
-  z-index: 0; /* behind image */
-}
-
-/* Smoke around edges (desktop) */
-.smoke:nth-child(2) { animation-delay: 0.5s; left: 30%; width: 50px; height: 50px; }
-.smoke:nth-child(3) { animation-delay: 1.5s; left: 65%; width: 60px; height: 60px; }
-.smoke:nth-child(4) { animation-delay: 2.5s; left: 20%; width: 45px; height: 45px; }
-.smoke:nth-child(5) { animation-delay: 3.5s; left: 70%; width: 55px; height: 55px; }
-
-/* Smoke rising + swaying (desktop) */
-@keyframes riseWind {
-  0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0.5; }
-  25%  { transform: translate(-70%, -80px) scale(0.7) rotate(10deg); opacity: 0.7; }
-  50%  { transform: translate(-30%, -160px) scale(1) rotate(-10deg); opacity: 0.9; }
-  75%  { transform: translate(-60%, -240px) scale(1.2) rotate(5deg); opacity: 0.7; }
-  100% { transform: translate(-50%, -320px) scale(1.5) rotate(0deg); opacity: 0; }
-}
-
-/* ===============================
-   Mobile Smoke Adjustment
-   (screens < 768px)
-=================================*/
-@media (max-width: 768px) {
-  /* Slightly smaller smoke, more dynamic sway */
+  /* ===============================
+     Smoke Effect - Desktop & Mobile
+  =================================*/
+  .smoke-container {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+  }
   .smoke {
-    width: 35px;
-    height: 35px;
-    filter: blur(20px);
-    animation: riseWindMobile 5s infinite ease-in-out;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(0,255,255,0.8) 20%, transparent 80%);
+    border-radius: 50%;
+    filter: blur(25px);
+    animation: riseWind 6s infinite ease-in-out;
+    opacity: 0.8;
+    z-index: 0;
   }
-
-  .smoke:nth-child(2) { left: 25%; width: 40px; height: 40px; animation-delay: 0.3s; }
-  .smoke:nth-child(3) { left: 65%; width: 45px; height: 45px; animation-delay: 1s; }
-  .smoke:nth-child(4) { left: 20%; width: 35px; height: 35px; animation-delay: 1.7s; }
-  .smoke:nth-child(5) { left: 70%; width: 40px; height: 40px; animation-delay: 2.3s; }
-
-  /* More wind-like swaying on mobile */
-  @keyframes riseWindMobile {
+  .smoke:nth-child(2) { animation-delay: 0.5s; left: 30%; width: 50px; height: 50px; }
+  .smoke:nth-child(3) { animation-delay: 1.5s; left: 65%; width: 60px; height: 60px; }
+  .smoke:nth-child(4) { animation-delay: 2.5s; left: 20%; width: 45px; height: 45px; }
+  .smoke:nth-child(5) { animation-delay: 3.5s; left: 70%; width: 55px; height: 55px; }
+  @keyframes riseWind {
     0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0.5; }
-    20%  { transform: translate(-80%, -60px) scale(0.6) rotate(15deg); opacity: 0.7; }
-    40%  { transform: translate(-20%, -120px) scale(0.9) rotate(-10deg); opacity: 0.9; }
-    60%  { transform: translate(-70%, -180px) scale(1.1) rotate(5deg); opacity: 0.7; }
-    80%  { transform: translate(-30%, -240px) scale(1.3) rotate(-5deg); opacity: 0.6; }
-    100% { transform: translate(-50%, -300px) scale(1.5) rotate(0deg); opacity: 0; }
+    25%  { transform: translate(-70%, -80px) scale(0.7) rotate(10deg); opacity: 0.7; }
+    50%  { transform: translate(-30%, -160px) scale(1) rotate(-10deg); opacity: 0.9; }
+    75%  { transform: translate(-60%, -240px) scale(1.2) rotate(5deg); opacity: 0.7; }
+    100% { transform: translate(-50%, -320px) scale(1.5) rotate(0deg); opacity: 0; }
   }
-}
+  @media (max-width: 768px) {
+    .smoke {
+      width: 35px;
+      height: 35px;
+      filter: blur(20px);
+      animation: riseWindMobile 5s infinite ease-in-out;
+    }
+    .smoke:nth-child(2) { left: 25%; width: 40px; height: 40px; animation-delay: 0.3s; }
+    .smoke:nth-child(3) { left: 65%; width: 45px; height: 45px; animation-delay: 1s; }
+    .smoke:nth-child(4) { left: 20%; width: 35px; height: 35px; animation-delay: 1.7s; }
+    .smoke:nth-child(5) { left: 70%; width: 40px; height: 40px; animation-delay: 2.3s; }
+    @keyframes riseWindMobile {
+      0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0.5; }
+      20%  { transform: translate(-80%, -60px) scale(0.6) rotate(15deg); opacity: 0.7; }
+      40%  { transform: translate(-20%, -120px) scale(0.9) rotate(-10deg); opacity: 0.9; }
+      60%  { transform: translate(-70%, -180px) scale(1.1) rotate(5deg); opacity: 0.7; }
+      80%  { transform: translate(-30%, -240px) scale(1.3) rotate(-5deg); opacity: 0.6; }
+      100% { transform: translate(-50%, -300px) scale(1.5) rotate(0deg); opacity: 0; }
+    }
+  }
 
-
+  /* ===============================
+     Gallery Grid
+  =================================*/
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid rgba(0,234,255,0.3);
+    filter: brightness(0.9);
+    transition: transform 0.3s, filter 0.3s;
+  }
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+    filter: brightness(1);
+  }
 </style>
 </head>
 <body>
@@ -276,10 +277,10 @@
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
-    
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -290,7 +291,9 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about">About</a>
   <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
   <a href="#projects">Projects</a>
+  <a href="#gallery">Gallery</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -305,8 +308,8 @@
       <div class="smoke"></div>
     </div>
     <h2>Welcome to My Realm</h2>
-    <p>🌌 Dreamer • Developer • Designer • Teacher</p>
-    <p>I am Michael - a creator who crafts digital worlds with code and imagination. My journey is guided by curiosity and fueled by design, where every project is a spell, and every interface a portal.</p>
+    <p>• Dreamer • Developer • Designer • Teacher</p>
+    <p>I am Michael - a creator who crafts digital worlds with code and imagination. I love turning curiosity into realities.</p>
   </div>
 </section>
 
@@ -322,12 +325,35 @@
   </div>
 </section>
 
+<section id="education">
+  <div class="card">
+    <h2>My Magical Academy (Education)</h2>
+    <ul>
+      <li><strong>BSIT major in Data Analytics:</strong> Mapua Malayan Digital College, 2023- 2025</li>
+      <li><strong>BSEd major in Science:</strong> Cebu Institute of Technology University</li>
+      <li><strong>BSEd major in English:</strong> John Paul College</li>
+    </ul>
+  </div>
+</section>
+
 <section id="projects">
   <div class="card">
     <h2>Artifacts I Forged (Projects)</h2>
     <p><strong>Portal Site:</strong> A magical entry point to my works, glowing with life.</p>
     <p><strong>Marketplace Spell:</strong> An enchanted e-commerce world with seamless flows.</p>
     <p><strong>Dream App:</strong> A cross-realm mobile design for adventurers everywhere.</p>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="card">
+    <h2>Gallery of Wonders</h2>
+    <div class="gallery-grid">
+      <img src="gallery1.jpg" alt="Gallery Item 1">
+      <img src="gallery2.jpg" alt="Gallery Item 2">
+      <img src="gallery3.jpg" alt="Gallery Item 3">
+      <img src="gallery4.jpg" alt="Gallery Item 4">
+    </div>
   </div>
 </section>
 
@@ -345,10 +371,9 @@
 
 <!-- Background Music -->
 <audio id="bg-music" loop autoplay>
-  <source src="new-heart.mp3" type="audio/mpeg">
+  <source src="DaeDaeDae.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
-
 
 <script>
   // Rain effect
@@ -381,20 +406,15 @@
   hamburger.addEventListener('click', () => {
     mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
   });
-</script>
 
-<script>
+  // Background music autoplay handling
   const bgMusic = document.getElementById("bg-music");
-
-  // Try autoplay (may be blocked by some browsers)
   bgMusic.autoplay = true;
-  bgMusic.volume = 0.4; // soft background volume
+  bgMusic.volume = 0.4;
   bgMusic.load();
-  
-  // If blocked, play on first user interaction
   document.body.addEventListener("click", () => {
     if (bgMusic.paused) {
-      bgMusic.play().catch(err => console.log("Autoplay blocked, user must click:", err));
+      bgMusic.play().catch(err => console.log("Autoplay blocked:", err));
     }
   }, { once: true });
 </script>
