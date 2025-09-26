@@ -204,7 +204,9 @@
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
+    
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -225,7 +227,7 @@
     <img src="me.jpg" alt="Profile" class="profile-img">
     <h2>Welcome to My Realm</h2>
     <p>🌌 Dreamer • Developer • Designer • Teacher</p>
-    <p>I am a creator who crafts digital worlds with code and imagination. My journey is guided by curiosity and fueled by design, where every project is a spell, and every interface a portal.</p>
+    <p>I am Michael - a creator who crafts digital worlds with code and imagination. My journey is guided by curiosity and fueled by design, where every project is a spell, and every interface a portal.</p>
   </div>
 </section>
 
@@ -262,6 +264,13 @@
   </div>
 </section>
 
+<!-- Background Music -->
+<audio id="bg-music" loop autoplay>
+  <source src="new-heart.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
 <script>
   // Rain effect
   const rain = document.getElementById('rain');
@@ -293,6 +302,22 @@
   hamburger.addEventListener('click', () => {
     mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
   });
+</script>
+
+<script>
+  const bgMusic = document.getElementById("bg-music");
+
+  // Try autoplay (may be blocked by some browsers)
+  bgMusic.autoplay = true;
+  bgMusic.volume = 0.4; // soft background volume
+  bgMusic.load();
+  
+  // If blocked, play on first user interaction
+  document.body.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play().catch(err => console.log("Autoplay blocked, user must click:", err));
+    }
+  }, { once: true });
 </script>
 
 </body>
