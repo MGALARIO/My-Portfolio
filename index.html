@@ -191,7 +191,7 @@
     .profile-img { width:120px; height:120px; }
   }
 
-  
+
 /* Smoke container */
 .smoke-container {
   position: relative;
@@ -241,6 +241,27 @@
   position: relative;
   z-index: 2; /* above smoke */
 }
+
+
+/* Mobile Smoke Adjustment */
+@media (max-width: 768px) {
+  /* Reduce smoke size slightly for smaller images */
+  .smoke {
+    width: 25px;
+    height: 25px;
+    filter: blur(18px);
+    opacity: 0.8;
+  }
+
+  /* Reposition smoke around smaller image */
+  .smoke:nth-child(2) { left: 25%; bottom: 5px; width: 30px; height: 30px; animation-delay: 0.5s; }
+  .smoke:nth-child(3) { left: 60%; bottom: 10px; width: 35px; height: 35px; animation-delay: 1.5s; }
+  .smoke:nth-child(4) { left: 20%; bottom: 15px; width: 28px; height: 28px; animation-delay: 2.5s; }
+  .smoke:nth-child(5) { left: 65%; bottom: 8px; width: 32px; height: 32px; animation-delay: 3.5s; }
+
+  /* Make smoke sway more dynamically for mobile wind effect */
+  @keyframes riseWindMobile {
+    0%   { transform: translate(-50%, 0) scale(0.5) rotate(0
 
 
 </style>
